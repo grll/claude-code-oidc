@@ -11,8 +11,12 @@ jobs:
         run: |
           mkdir -p ~/.claude
           echo '{
-            "refresh_token": "${{ secrets.CLAUDE_REFRESH_TOKEN }}",
-            "client_id": "9d1c250a-e61b-44d9-88ed-5944d1962f5e"
+            "claudeAiOauth":{
+              "accessToken": "${{ secrets.CLAUDE_ACCESS_TOKEN}}",
+              "refresh_token": "${{ secrets.CLAUDE_REFRESH_TOKEN }}",
+              "expiresAt":1748195110003,
+              "scope"[["user:inference","user:profile"]
+            }
           }' > ~/.claude/credentials.json
           
       - name: Install Claude Code
