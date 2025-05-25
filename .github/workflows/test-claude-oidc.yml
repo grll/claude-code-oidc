@@ -20,3 +20,6 @@ jobs:
         
       - name: Test authentication
         run: claude --version
+        
+      - name: Test Claude with a prompt
+        run: claude -p "Say Hello"
