@@ -13,9 +13,9 @@ jobs:
           echo '{
             "claudeAiOauth":{
               "accessToken": "${{ secrets.CLAUDE_ACCESS_TOKEN}}",
-              "refresh_token": "${{ secrets.CLAUDE_REFRESH_TOKEN }}",
+              "refreshToken": "${{ secrets.CLAUDE_REFRESH_TOKEN }}",
               "expiresAt":1748195110003,
-              "scope"[["user:inference","user:profile"]
+              "scopes":["user:inference","user:profile"]
             }
           }' > ~/.claude/credentials.json
           
