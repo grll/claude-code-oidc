@@ -1,0 +1,22 @@
+name: Test Claude OIDC
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-claude:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Claude Code with stored credentials
+        run: |
+          mkdir -p ~/.claude
+          echo '{
+            "refresh_token": "${{ secrets.CLAUDE_REFRESH_TOKEN }}",
+            "client_id": "9d1c250a-e61b-44d9-88ed-5944d1962f5e"
+          }' > ~/.claude/credentials.json
+          
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+        
+      - name: Test authentication
+        run: claude --version
