@@ -17,7 +17,7 @@ jobs:
               "expiresAt":1748195110003,
               "scopes":["user:inference","user:profile"]
             }
-          }' > ~/.claude/credentials.json
+          }' > ~/.claude/.credentials.json
           
       - name: Install Claude Code
         run: npm install -g @anthropic-ai/claude-code
