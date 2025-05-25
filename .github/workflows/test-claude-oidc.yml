@@ -12,7 +12,13 @@ jobs:
           mkdir -p ~/.claude
           echo '{
             "claudeAiOauth":{
+              "accessToken": "",
               "refreshToken": "${{ secrets.CLAUDE_REFRESH_TOKEN }}",
+              "expiresAt": 0,
+              "scopes": [
+                "user:inference",
+                "user:profile"
+              ]
             }
           }' > ~/.claude/.credentials.json
           
