@@ -9,6 +9,12 @@ on:
   pull_request_review:
     types: [submitted]
 
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  id-token: write  # Required for OIDC authentication when using GitHub App
+
 jobs:
   claude-response:
     runs-on: ubuntu-latest
