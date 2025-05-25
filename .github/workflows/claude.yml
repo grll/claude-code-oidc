@@ -1,4 +1,5 @@
-name: Claude Assistant
+name: Claude PR Assistant
+
 on:
   issue_comment:
     types: [created]
@@ -9,25 +10,31 @@ on:
   pull_request_review:
     types: [submitted]
 
-permissions:
-  contents: write
-  pull-requests: write
-  issues: write
-  id-token: write  # Required for OIDC authentication when using GitHub App
-
 jobs:
-  claude-response:
+  claude-code-action:
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
+      (github.event_name == 'issues' && contains(github.event.issue.body, '@claude'))
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: read
+      id-token: write
     steps:
-      - uses: grll/claude-code-action@beta  # Fork with OAuth support
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          use_oauth: "true"
+          fetch-depth: 1
+
+      - name: Run Claude PR Action
+        uses: grll/claude-code-action@beta
+        with:
+          use_oauth: true
           claude_access_token: ${{ secrets.CLAUDE_ACCESS_TOKEN }}
           claude_refresh_token: ${{ secrets.CLAUDE_REFRESH_TOKEN }}
           claude_expires_at: ${{ secrets.CLAUDE_EXPIRES_AT }}
           
-          # github_token: ${{ secrets.GITHUB_TOKEN }}
-          # Optional: add custom trigger phrase (default: @claude)
-          # trigger_phrase: "/claude"
-          # Optional: add assignee trigger for issues
-          # assignee_trigger: "claude"
+          timeout_minutes: "60"
