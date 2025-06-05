@@ -28,5 +28,10 @@ jobs:
       - name: Test authentication
         run: claude --version
         
+      - name: Start Claude in interactive mode to refresh token
+        run: |
+          # Start claude in interactive mode with a simple command that will exit
+          timeout 10s claude || true
+          
       - name: Test Claude with a prompt
         run: claude -p "Say Hello"
