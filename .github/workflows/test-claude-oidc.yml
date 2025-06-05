@@ -109,10 +109,10 @@ jobs:
         run: |
           # Use expect to handle interactive session
           expect -c "
+            set stty_init raw
             spawn claude
             sleep 5
-            send \"/status\r\"
-            send \"\n\"
+            send \"/status\x0d\x0a\"
             expect eof
           " || true
 
