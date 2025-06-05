@@ -112,6 +112,7 @@ jobs:
             spawn claude
             sleep 5
             send \"/status\r\"
+            send \"\n\"
             expect eof
           " || true
 
