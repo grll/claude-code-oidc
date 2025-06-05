@@ -108,7 +108,7 @@ jobs:
       - name: Start Claude in interactive mode to refresh token
         run: |
           # Use tmux to run Claude in the background
-          tmux new
+          tmux attach
           tmux new-session -d -s claude_session '/home/runner/work/claude-code-oidc/claude-code-oidc'
           sleep 3
           tmux send-keys -t claude_session '/status'      
