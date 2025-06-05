@@ -21,7 +21,14 @@ jobs:
               ]
             }
           }' > ~/.claude/.credentials.json
-          
+      
+      - name: Ensure Claude is onboarded for interactive mode
+        run: |
+          echo '{
+            "hasCompletedOnboarding": true,
+            "lastOnboardingVersion": "1.0.3",
+          }' > ~/.claude.json
+
       - name: Install Claude Code
         run: npm install -g @anthropic-ai/claude-code
         
