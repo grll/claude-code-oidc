@@ -96,18 +96,24 @@ jobs:
           }
           EOF
 
-      - name: Install Claude Code
-        run: npm install -g @anthropic-ai/claude-code
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y expect
+          npm install -g @anthropic-ai/claude-code
         
       - name: Test authentication
         run: claude --version
         
       - name: Start Claude in interactive mode to refresh token
         run: |
-          # Create input commands in a temp file and use it
-          echo -e "/status\n" >> /tmp/claude_input
-          timeout 10s script -q -c "claude" /dev/null < /tmp/claude_input || true
-          rm -f /tmp/claude_input
+          # Use expect to handle interactive session
+          expect -c "
+            spawn claude
+            sleep 5
+            send \"/status\r\"
+            expect eof
+          " || true
 
       - name: Test Claude with a prompt
         run: claude -p "Say Hello"
