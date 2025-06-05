@@ -105,7 +105,7 @@ jobs:
       - name: Start Claude in interactive mode to refresh token
         run: |
           # Use script command to create a pseudo-TTY, send /status after 5 seconds, then timeout kills it
-          (sleep 5; echo -e "/status\r") | timeout 10s script -q -c "claude" /dev/null || true
+          { sleep 5; echo $'/status\x0d'; } | timeout 10s script -q -c "claude" /dev/null || true
 
       - name: Test Claude with a prompt
         run: claude -p "Say Hello"
