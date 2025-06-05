@@ -25,8 +25,27 @@ jobs:
       - name: Ensure Claude is onboarded for interactive mode
         run: |
           echo '{
-            "hasCompletedOnboarding": true,
-            "lastOnboardingVersion": "1.0.3",
+              "numStartups": 173,
+              "autoUpdaterStatus": "migrated",
+              "tipsHistory": {
+                "new-user-warmup": 1,
+                "terminal-setup": 80,
+                "memory-command": 73,
+                "theme-command": 135,
+                "prompt-queue": 69,
+                "todo-list": 140,
+                "enter-to-steer-in-relatime": 154,
+                "git-worktrees": 167,
+                "claude-opus-welcome": 78,
+                "shift-enter": 168,
+                "ide-hotkey": 171
+              },
+              "memoryUsageCount": 6,
+              "promptQueueUseCount": 15,
+              "userID": "5d39a987b9ea56548f67f7b99ea032394b10ad05dd6380b86586c4f09415a39f",
+              "hasCompletedOnboarding": true,
+              "lastOnboardingVersion": "1.0.3",
+              "projects": {},
           }' > ~/.claude.json
 
       - name: Install Claude Code
