@@ -52,7 +52,7 @@ jobs:
                 "history": [],
                 "dontCrawlDirectory": false,
                 "mcpContextUris": [],
-                "mcpServers": {},g
+                "mcpServers": {},
                 "hasTrustDialogAccepted": true,
                 "ignorePatterns": [],
                 "projectOnboardingSeenCount": 2,
